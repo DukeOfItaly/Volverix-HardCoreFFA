@@ -1,0 +1,7 @@
+name: HardCoreFFA
+version: 1.0
+authors:
+  - DukeOfItaly
+  - Oxince
+main: net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA
+commands:
