@@ -12,14 +12,16 @@ public class ScoreBoardPattern {
     HardCoreFFA hardCoreFFA = new HardCoreFFA();
     VolverixPlayer volverixPlayer = new VolverixPlayer(hardCoreFFA.getDriverManager());
 
-// TODO CHECK THIS CLASS
+    Integer currentKills = statsPattern.getStatistics(StatisticsType.KILLS);
+    Integer currentDeaths = statsPattern.getStatistics(StatisticsType.DEATHS);
+    private Player player;
+    StatsPattern statsPattern = new StatsPattern(hardCoreFFA.getDriverManager(), "HardCoreFFA", player.getUniqueId());
+    HardCoreFFAStatsPattern sp = new HardCoreFFAStatsPattern(player);
+    Integer currentKillStreak = sp.getKillStreak(player);
+
 
     public ScoreBoardPattern(Player player) {
-        StatsPattern statsPattern = new StatsPattern(hardCoreFFA.getDriverManager(), "HardCoreFFA", player.getUniqueId());
-        HardCoreFFAStatsPattern sp = new HardCoreFFAStatsPattern(player);
-        Integer currentKills = statsPattern.getStatistics(StatisticsType.KILLS);
-        Integer currentDeaths = statsPattern.getStatistics(StatisticsType.DEATHS);
-        Integer currentKillStreak = sp.getKillStreak(player);
+        this.player = player;
     }
 
     public void setScoreBoard() {

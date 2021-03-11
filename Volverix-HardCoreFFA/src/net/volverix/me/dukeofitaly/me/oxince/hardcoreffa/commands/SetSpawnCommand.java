@@ -18,9 +18,9 @@ public class SetSpawnCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission("hardcoreffa.setspawn")) {
-                if (args.length == 0) {
+                if (args.length == 1) {
                     Location spawn = player.getLocation();
-                    configPattern.setLocation("spawn", spawn);
+                    configPattern.setLocation(args[2], "spawn", spawn);
                     player.sendMessage(configPattern.getConfigString("Game.Prefix") + "§aYou have set the spawn correctly!");
                 } else {
                     player.sendMessage(configPattern.getConfigString("Game.Prefix") + "§7Please use /setspawn <mapname>");
