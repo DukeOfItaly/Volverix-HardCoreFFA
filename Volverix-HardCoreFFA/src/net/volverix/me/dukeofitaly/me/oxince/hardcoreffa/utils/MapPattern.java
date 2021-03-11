@@ -1,6 +1,7 @@
 package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA;
 import org.bukkit.entity.Player;
 
@@ -10,16 +11,22 @@ import java.util.List;
 
 public class MapPattern {
 
+
+    HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
+    ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
+
+    String prefix = configPattern.getConfigString("Game.Prefix");
+
     @Getter
     public HashMap<String, Integer> mapVotes = new HashMap<>();
     @Getter
     public List<String> maps = new ArrayList<>();
     public ArrayList<Player> hasVoted = new ArrayList<>();
-    HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
-    ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
-    String prefix = configPattern.getConfigString("Game.Prefix");
     @Getter
     private String currentMap;
+    @Getter
+    @Setter
+    private String nextMap;
 
     public void setCurrentMap(String mapName) {
         currentMap = mapName;

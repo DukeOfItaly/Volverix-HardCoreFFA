@@ -23,7 +23,7 @@ public class VoteCommand implements CommandExecutor {
             if (args.length == 1) {
                 mapPattern.voteMap(args[2], player);
             } else {
-                player.sendMessage(prefix + "§7Please use /vote <mapname>");
+                player.sendMessage(prefix + "§7Please use /mapvote <mapname>");
             }
         }
         return false;
