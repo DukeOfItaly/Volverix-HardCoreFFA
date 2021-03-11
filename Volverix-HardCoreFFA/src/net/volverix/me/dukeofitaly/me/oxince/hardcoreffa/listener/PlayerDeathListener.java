@@ -22,18 +22,29 @@ public class PlayerDeathListener implements Listener {
         HardCoreFFAStatsPattern statsDied = new HardCoreFFAStatsPattern(died);
         HardCoreFFAStatsPattern statsKiller = new HardCoreFFAStatsPattern(killer);
 
+
         String prefix = configPattern.getConfigString("Game.prefix");
         Location spawn = ConfigPattern.getLocation("spawn");
 
         died.sendMessage(prefix + "§7You have been killed by §c" + killer);
         statsDied.addDeaths(died);
         died.teleport(spawn);
+        if (statsDied.getKillStreak().containsKey(died)) {
+            statsDied.getKillStreak().remove(died);
+        }
 
 
         statsKiller.addKill(killer);
         killer.sendMessage(prefix + "§7You have killed the player §a" + died);
         killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1000, 1000);
+        if (statsKiller.getKillStreak().containsKey(killer)) {
+            statsKiller.addKillStreakKill(killer);
+        } else {
+            statsKiller.startKillStreak(killer);
+        }
 
+
+        event.setKeepInventory(true);
 
     }
 

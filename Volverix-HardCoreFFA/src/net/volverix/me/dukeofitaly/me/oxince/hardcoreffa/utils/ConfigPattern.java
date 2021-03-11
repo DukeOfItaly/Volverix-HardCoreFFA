@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ConfigPattern {
 
@@ -42,6 +43,7 @@ public class ConfigPattern {
             }
         }
 
+        cfg.addDefault("Maps", new ArrayList<>());
         cfg.addDefault("Game.Prefix", "§7[§bHardCoreFFA§7] ");
         cfg.options().copyDefaults(true);
         saveConfig();

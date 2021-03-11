@@ -1,7 +1,6 @@
 package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener;
 
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ConfigPattern;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ItemPattern;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ScoreBoardPattern;
@@ -15,7 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    HardCoreFFA hardCoreFFA = new HardCoreFFA();
+    HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -23,7 +22,7 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         VolverixPlayer volverixPlayer = new VolverixPlayer(hardCoreFFA.getDriverManager());
         ItemPattern itemPattern = new ItemPattern(player);
-        ConfigPattern configPattern = new ConfigPattern();
+        ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
         ClanPattern clanPattern = volverixPlayer.getClanPattern(player);
         ScoreBoardPattern scoreBoardPattern = new ScoreBoardPattern(player);
         String clanName = clanPattern.getClanName();
@@ -37,8 +36,7 @@ public class PlayerJoinListener implements Listener {
             clanPattern.addClanPlayerInHashMap(clanName);
         }
 
-        itemPattern.setKit(KitTypes.getCurrentKit());
-
+        itemPattern.setJoinItems();
 
         scoreBoardPattern.setScoreBoard();
 

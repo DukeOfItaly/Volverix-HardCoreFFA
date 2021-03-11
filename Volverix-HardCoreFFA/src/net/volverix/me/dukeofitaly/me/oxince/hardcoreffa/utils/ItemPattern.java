@@ -35,5 +35,11 @@ public class ItemPattern {
         }
     }
 
+    public void setJoinItems() {
+        setItem(Material.PAPER, 0, "§dMap-Vote", Arrays.asList(""));
+        setItem(Material.IRON_CHESTPLATE, 4, "§dKit-Vote", Arrays.asList(""));
+        setItem(Material.SLIME_BALL, 8, "§dLeave", Arrays.asList(""));
+    }
+
 
 }

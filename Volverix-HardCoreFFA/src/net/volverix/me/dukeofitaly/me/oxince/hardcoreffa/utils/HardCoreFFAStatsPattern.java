@@ -14,6 +14,9 @@ public class HardCoreFFAStatsPattern {
     @Getter
     private HashMap<Player, Integer> killsMap = new HashMap<>();
 
+    @Getter
+    private HashMap<Player, Integer> killStreak = new HashMap<>();
+
     private Player player;
 
     public HardCoreFFAStatsPattern(Player player) {
@@ -42,4 +45,26 @@ public class HardCoreFFAStatsPattern {
         deathsMap.put(player, newDeaths);
     }
 
+    public Integer getKillStreak(Player player) {
+        Integer killstreak = killStreak.get(player);
+        return killstreak;
+    }
+
+    public void setKillStreak(Player player, Integer value) {
+        killStreak.put(player, value);
+    }
+
+    public void resetKillStreak(Player player) {
+        killStreak.remove(player);
+    }
+
+    public void startKillStreak(Player player) {
+        killStreak.put(player, 1);
+    }
+
+    public void addKillStreakKill(Player player) {
+        Integer currentKilLStreak = getKillStreak(player);
+        Integer newKillStreak = currentKilLStreak + 1;
+        setKillStreak(player, newKillStreak);
+    }
 }

@@ -16,16 +16,25 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class HardCoreFFA extends JavaPlugin {
 
-    ConfigPattern configPattern = new ConfigPattern();
+
+    @Getter
+    private static HardCoreFFA hardCoreFFA;
+    @Getter
+    private ConfigPattern configPattern;
     @Getter
     private DriverManager driverManager;
 
     @Override
     public void onEnable() {
+        hardCoreFFA = this;
+        configPattern = new ConfigPattern();
         driverManager = new DriverManager("", "", "", "");
         KitTypes.setCurrentKit(KitTypes.TEST);
         configPattern.saveConfig();
         configPattern.setupFiles();
+        registerCommands();
+        registerListener();
+
     }
 
     public void onDisable() {
