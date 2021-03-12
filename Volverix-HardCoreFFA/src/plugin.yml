@@ -6,8 +6,5 @@ authors:
 main: net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA
 commands:
   setspawn:
-  createmap:
-  forcemap:
-  mapvote:
-  kitvote:
   build:
+  setpos:

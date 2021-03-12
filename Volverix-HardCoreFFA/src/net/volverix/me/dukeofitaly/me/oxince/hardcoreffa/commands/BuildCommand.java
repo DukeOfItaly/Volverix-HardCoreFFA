@@ -5,6 +5,7 @@ import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ConfigPattern;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ItemPattern;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ZonePattern;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +19,7 @@ public class BuildCommand implements CommandExecutor {
     public static ArrayList<Player> inBuild = new ArrayList<>();
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
     ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
+    ZonePattern zonePattern = hardCoreFFA.getZonePattern();
     private String prefix = configPattern.getPrefix();
 
     @Override
@@ -29,10 +31,15 @@ public class BuildCommand implements CommandExecutor {
                 if (!(inBuild.contains(player))) {
                     inBuild.add(player);
                     player.setGameMode(GameMode.CREATIVE);
+                    player.getInventory().clear();
                     player.sendMessage(prefix + "§7You are now in §dBuild-Mode§7!");
                 } else {
                     player.setGameMode(GameMode.SURVIVAL);
-                    itemPattern.setKit(KitTypes.getCurrentKit());
+                    if (zonePattern.isInSpawn(player.getLocation(), zonePattern.getL1(), zonePattern.getL2())) {
+                        itemPattern.setJoinItems();
+                    } else {
+                        itemPattern.setKit(KitTypes.getCurrentKit());
+                    }
                     inBuild.remove(player);
                     player.sendMessage(prefix + "§7You are no longer in §dBuild-Mode§7!");
                 }

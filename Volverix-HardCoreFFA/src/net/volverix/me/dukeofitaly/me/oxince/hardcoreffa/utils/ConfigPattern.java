@@ -1,6 +1,7 @@
 package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,19 +9,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigPattern {
 
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
-    MapPattern mapPattern = hardCoreFFA.getMapPattern();
 
+    public static File folder = new File("plugins/HardCoreFFA");
+    public static File file = new File("plugins/HardCoreFFA/data.yml");
     @Getter
-    private String prefix = getConfigString("Game.Prefix");
-
-    public static File folder = new File("plugins/Tactic-BW/");
-    public static File file = new File("plugins/Tactic-BW/data.yml");
+    @Setter
+    private String prefix;
     public static YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
     public void saveConfig() {
@@ -43,8 +41,7 @@ public class ConfigPattern {
             }
         }
 
-        cfg.addDefault("Maps", new ArrayList<>());
-        cfg.addDefault("Game.Prefix", "§7[§bHardCoreFFA§7] ");
+        cfg.addDefault("Game.Prefix", "&7[&bHardCoreFFA&7] ");
         cfg.options().copyDefaults(true);
         saveConfig();
     }
@@ -53,8 +50,8 @@ public class ConfigPattern {
         return cfg.getString(path).replace("&", "§");
     }
 
-    public static Location getLocation(String mapName, String name) {
-        String mainPath = "Locations." + mapName + "." + name;
+    public Location getLocation(String name) {
+        String mainPath = "Locations." + name;
         Location loc = new Location(Bukkit.getWorld(cfg.getString(mainPath + ".World")), cfg.getDouble(mainPath + ".X"),
                 cfg.getDouble(mainPath + ".Y"), cfg.getDouble(mainPath + ".Z"));
         loc.setYaw((float) cfg.getDouble(mainPath + ".Yaw"));
@@ -62,20 +59,16 @@ public class ConfigPattern {
         return loc;
     }
 
-    public void setLocation(String mapName, String name, Location loc) {
-        cfg.set("Locations." + mapName + "." + name + ".X", loc.getBlockX() + 0.5);
-        cfg.set("Locations." + mapName + "." + name + ".Y", loc.getBlockY());
-        cfg.set("Locations." + mapName + "." + name + ".Z", loc.getBlockZ() + 0.5);
-        cfg.set("Locations." + mapName + "." + name + ".Yaw", Math.round(loc.getYaw() / 45) * 45);
-        cfg.set("Locations." + mapName + "." + name + ".Pitch", Math.round(loc.getPitch() / 45) * 45);
-        cfg.set("Locations." + mapName + "." + name + ".World", loc.getWorld().getName());
+    public void setLocation(String name, Location loc) {
+        cfg.set("Locations." + name + ".X", loc.getBlockX() + 0.5);
+        cfg.set("Locations." + name + ".Y", loc.getBlockY());
+        cfg.set("Locations." + name + ".Z", loc.getBlockZ() + 0.5);
+        cfg.set("Locations." + name + ".Yaw", Math.round(loc.getYaw() / 45) * 45);
+        cfg.set("Locations." + name + ".Pitch", Math.round(loc.getPitch() / 45) * 45);
+        cfg.set("Locations." + name + ".World", loc.getWorld().getName());
         saveConfig();
     }
 
-    public void createMap(String mapName) {
-        mapPattern.getMaps().add(mapName);
-        cfg.set("Maps", mapPattern.getMaps());
-    }
 
     public String getWorld(String name) {
         String mainPath = "Locations." + name;
@@ -83,9 +76,5 @@ public class ConfigPattern {
         return world;
     }
 
-    public List<String> getMaps() {
-        List<String> maps = cfg.getStringList("Maps");
-        return maps;
-    }
 
 }

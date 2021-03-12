@@ -24,12 +24,18 @@ public class HardCoreFFAStatsPattern {
     }
 
     public Integer getDeaths() {
-        Integer d = deathsMap.get(player);
+        Integer d = 0;
+        if (deathsMap.containsKey(player)) {
+            d = deathsMap.get(player);
+        }
         return d;
     }
 
     public Integer getKills() {
-        Integer k = killsMap.get(player);
+        Integer k = 0;
+        if (killsMap.containsKey(player)) {
+            k = killsMap.get(player);
+        }
         return k;
     }
 
@@ -67,4 +73,6 @@ public class HardCoreFFAStatsPattern {
         Integer newKillStreak = currentKilLStreak + 1;
         setKillStreak(player, newKillStreak);
     }
+
+
 }

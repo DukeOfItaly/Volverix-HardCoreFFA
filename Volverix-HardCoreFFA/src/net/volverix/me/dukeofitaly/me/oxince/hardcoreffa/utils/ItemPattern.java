@@ -29,6 +29,7 @@ public class ItemPattern {
     }
 
     public void setKit(KitTypes kitTypes) {
+        player.getInventory().clear();
         switch (kitTypes) {
             case TEST:
                 setItem(Material.DIAMOND_SWORD, 0, "§dTEST-SWORD", Arrays.asList("§7Test Lore"));
@@ -36,6 +37,7 @@ public class ItemPattern {
     }
 
     public void setJoinItems() {
+        player.getInventory().clear();
         setItem(Material.PAPER, 0, "§dMap-Vote", Arrays.asList(""));
         setItem(Material.IRON_CHESTPLATE, 4, "§dKit-Vote", Arrays.asList(""));
         setItem(Material.SLIME_BALL, 8, "§dLeave", Arrays.asList(""));

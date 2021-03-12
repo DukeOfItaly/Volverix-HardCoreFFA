@@ -2,19 +2,17 @@ package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa;
 
 
 import lombok.Getter;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.*;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.BuildCommand;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.SetSpawnCommand;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.SpawnZoneCommand;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.PlayerDeathListener;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.PlayerDisconnectListener;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.PlayerJoinListener;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.*;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ConfigPattern;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.MapPattern;
-import net.volverix.me.oxince.volverixcore.sql.DriverManager;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils.ZonePattern;
+import net.volverix.me.oxince.me.dukeofitaly.core.sql.DriverManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.List;
 
 
 public class HardCoreFFA extends JavaPlugin {
@@ -27,21 +25,22 @@ public class HardCoreFFA extends JavaPlugin {
     @Getter
     private DriverManager driverManager;
     @Getter
-    private MapPattern mapPattern;
+    private ZonePattern zonePattern;
 
     @Override
     public void onEnable() {
         hardCoreFFA = this;
+        connect();
         configPattern = new ConfigPattern();
-        mapPattern = new MapPattern();
-        driverManager = new DriverManager("", "", "", "");
+        zonePattern = new ZonePattern();
+        zonePattern.setL1(configPattern.getLocation("l1"));
+        zonePattern.setL2(configPattern.getLocation("l2"));
         KitTypes.setCurrentKit(KitTypes.TEST);
         configPattern.saveConfig();
         configPattern.setupFiles();
+        configPattern.setPrefix(configPattern.getConfigString("Game.Prefix"));
         registerCommands();
         registerListener();
-        loadMaps();
-
     }
 
     public void onDisable() {
@@ -50,9 +49,7 @@ public class HardCoreFFA extends JavaPlugin {
     private void registerCommands() {
         this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         this.getCommand("build").setExecutor(new BuildCommand());
-        this.getCommand("forcemap").setExecutor(new ForceMapCommand());
-        this.getCommand("mapvote").setExecutor(new MapVoteCommand());
-        this.getCommand("createmap").setExecutor(new CreateMapCommand());
+        this.getCommand("setpos").setExecutor(new SpawnZoneCommand());
 
     }
 
@@ -61,10 +58,28 @@ public class HardCoreFFA extends JavaPlugin {
         pm.registerEvents(new PlayerDeathListener(), this);
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerDisconnectListener(), this);
+        pm.registerEvents(new PlayerHungerListener(), this);
+        pm.registerEvents(new PlayerDropItemListener(), this);
+        pm.registerEvents(new PlayerDamageListener(), this);
+        pm.registerEvents(new EventsListener(), this);
+        pm.registerEvents(new PlayerMoveListener(), this);
+
     }
 
-    public void loadMaps() {
-        List maps = configPattern.getMaps();
+    private void connect() {
+        driverManager = new DriverManager("localhost", "root", "hardcoreffa", "");
+        if (!driverManager.isConnected()) {
+            try {
+                System.out.println("[HardCoreFFA] Trying to connect to MySQL database via VolverixCore...");
+                driverManager = new DriverManager("localhost", "root", "hardcoreffa", "");
+                driverManager.startConnection();
+                driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS PlayerData (UUID VARCHAR(128) PRIMARY KEY, COINS INT(16), CLAN VARCHAR(16), CLAN_RANK VARCHAR(16), ELO INT(16))").executeUpdate();
+                driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS PlayerSettings (UUID VARCHAR(128) PRIMARY KEY, PARTY_REQUESTS INT(16), FRIEND_REQUESTS INT(16))").executeUpdate();
+                driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS HardCoreFFA (UUID VARCHAR(128) PRIMARY KEY, KILLS INT(16), DEATHS INT(16), POINTS INT(16), WINS INT(16), EXTRAS INT(16))").executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
