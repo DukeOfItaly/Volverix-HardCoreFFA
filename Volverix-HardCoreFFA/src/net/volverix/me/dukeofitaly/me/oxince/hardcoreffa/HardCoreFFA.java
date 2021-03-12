@@ -2,7 +2,7 @@ package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa;
 
 
 import lombok.Getter;
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.SetSpawnCommand;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.*;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.PlayerDeathListener;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.listener.PlayerDisconnectListener;
@@ -49,6 +49,11 @@ public class HardCoreFFA extends JavaPlugin {
 
     private void registerCommands() {
         this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
+        this.getCommand("build").setExecutor(new BuildCommand());
+        this.getCommand("forcemap").setExecutor(new ForceMapCommand());
+        this.getCommand("mapvote").setExecutor(new MapVoteCommand());
+        this.getCommand("createmap").setExecutor(new CreateMapCommand());
+
     }
 
     private void registerListener() {

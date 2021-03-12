@@ -40,6 +40,7 @@ public class PlayerJoinListener implements Listener {
             clanPattern.addClanPlayerInHashMap(clanName);
         }
 
+        player.getInventory().clear();
         itemPattern.setJoinItems();
 
         scoreBoardPattern.setScoreBoard();
