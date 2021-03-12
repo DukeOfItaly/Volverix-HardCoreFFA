@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class ScoreBoardPattern {
 
-    HardCoreFFA hardCoreFFA = new HardCoreFFA();
+    HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
     VolverixPlayer volverixPlayer = new VolverixPlayer(hardCoreFFA.getDriverManager());
 
 

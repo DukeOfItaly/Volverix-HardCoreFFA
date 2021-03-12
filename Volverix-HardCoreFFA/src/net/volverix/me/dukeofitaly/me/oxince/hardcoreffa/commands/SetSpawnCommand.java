@@ -12,6 +12,8 @@ public class SetSpawnCommand implements CommandExecutor {
 
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
     ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
+    String prefix = configPattern.getPrefix();
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -21,12 +23,12 @@ public class SetSpawnCommand implements CommandExecutor {
                 if (args.length == 1) {
                     Location spawn = player.getLocation();
                     configPattern.setLocation(args[2], "spawn", spawn);
-                    player.sendMessage(configPattern.getConfigString("Game.Prefix") + "§aYou have set the spawn correctly!");
+                    player.sendMessage(prefix + "§aYou have set the spawn correctly!");
                 } else {
-                    player.sendMessage(configPattern.getConfigString("Game.Prefix") + "§7Please use /setspawn <mapname>");
+                    player.sendMessage(prefix + "§7Please use /setspawn <mapname>");
                 }
             } else {
-                player.sendMessage(configPattern.getConfigString("Game.Prefix") + "§cYou don't have the permissions to execute this command!");
+                player.sendMessage(prefix + "§cYou don't have the permissions to execute this command!");
             }
         }
         return false;

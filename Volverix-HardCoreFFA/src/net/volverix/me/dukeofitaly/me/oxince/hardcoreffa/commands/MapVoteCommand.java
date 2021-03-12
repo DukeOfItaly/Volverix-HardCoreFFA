@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class VoteCommand implements CommandExecutor {
+public class MapVoteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
@@ -16,7 +16,7 @@ public class VoteCommand implements CommandExecutor {
         MapPattern mapPattern = hardCoreFFA.getMapPattern();
         ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
 
-        String prefix = configPattern.getConfigString("Game.Prefix");
+        String prefix = configPattern.getPrefix();
 
         if (sender instanceof Player) {
             Player player = (Player) sender;

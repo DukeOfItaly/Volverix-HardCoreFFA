@@ -16,7 +16,7 @@ public class PlayerDeathListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
 
-        HardCoreFFA hardCoreFFA = new HardCoreFFA();
+        HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
         ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
         MapPattern mapPattern = hardCoreFFA.getMapPattern();
 
@@ -27,7 +27,7 @@ public class PlayerDeathListener implements Listener {
         HardCoreFFAStatsPattern statsKiller = new HardCoreFFAStatsPattern(killer);
 
 
-        String prefix = configPattern.getConfigString("Game.prefix");
+        String prefix = configPattern.getPrefix();
         Location spawn = ConfigPattern.getLocation(mapPattern.getCurrentMap(), "spawn");
 
         died.sendMessage(prefix + "§7You have been killed by §c" + killer);

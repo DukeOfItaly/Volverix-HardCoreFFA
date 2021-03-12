@@ -21,17 +21,19 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
+
         VolverixPlayer volverixPlayer = new VolverixPlayer(hardCoreFFA.getDriverManager());
         ItemPattern itemPattern = new ItemPattern(player);
         ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
         ClanPattern clanPattern = volverixPlayer.getClanPattern(player);
         ScoreBoardPattern scoreBoardPattern = new ScoreBoardPattern(player);
         MapPattern mapPattern = hardCoreFFA.getMapPattern();
+
+        String prefix = configPattern.getPrefix();
         String clanName = clanPattern.getClanName();
         Location spawn = ConfigPattern.getLocation(mapPattern.getCurrentMap(), "spawn");
 
-
-        event.setJoinMessage(configPattern.getConfigString("Game.Prefix") + "§7The player §e" + player.getName() + "§7 has joined the game!");
+        event.setJoinMessage(prefix + "§7The player §e" + player.getName() + "§7 has joined the game!");
         player.teleport(spawn);
 
         if (!(ClanPattern.clanMembers.containsKey(player.getUniqueId()))) {

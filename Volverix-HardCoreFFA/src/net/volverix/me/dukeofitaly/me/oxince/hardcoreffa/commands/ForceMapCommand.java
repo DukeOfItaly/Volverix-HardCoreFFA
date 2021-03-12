@@ -14,7 +14,7 @@ public class ForceMapCommand implements CommandExecutor {
     MapPattern mapPattern = hardCoreFFA.getMapPattern();
     ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
 
-    String prefix = configPattern.getConfigString("Game.Prefix");
+    String prefix = configPattern.getPrefix();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {

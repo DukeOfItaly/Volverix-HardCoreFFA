@@ -13,7 +13,7 @@ public class CreateMapCommand implements CommandExecutor {
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
     ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
     MapPattern mapPattern = hardCoreFFA.getMapPattern();
-    String prefix = configPattern.getConfigString("Game.Prefix");
+    String prefix = configPattern.getPrefix();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {

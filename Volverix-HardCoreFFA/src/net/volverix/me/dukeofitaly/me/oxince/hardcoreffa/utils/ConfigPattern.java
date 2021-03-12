@@ -1,5 +1,6 @@
 package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils;
 
+import lombok.Getter;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.HardCoreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,6 +15,9 @@ public class ConfigPattern {
 
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();
     MapPattern mapPattern = hardCoreFFA.getMapPattern();
+
+    @Getter
+    private String prefix = getConfigString("Game.Prefix");
 
     public static File folder = new File("plugins/Tactic-BW/");
     public static File file = new File("plugins/Tactic-BW/data.yml");
