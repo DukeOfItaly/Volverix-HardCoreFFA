@@ -1,6 +1,5 @@
 package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.utils;
 
-import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -28,19 +27,20 @@ public class ItemPattern {
         inv.setItem(slot, is);
     }
 
-    public void setKit(KitTypes kitTypes) {
+    public void setKit() {
         player.getInventory().clear();
-        switch (kitTypes) {
-            case TEST:
-                setItem(Material.DIAMOND_SWORD, 0, "§dTEST-SWORD", Arrays.asList("§7Test Lore"));
-        }
-    }
+        setItem(Material.DIAMOND_SWORD, 0, "§dTEST-SWORD", Arrays.asList(""));
+        setItem(Material.GOLDEN_APPLE, 1, "§6Apple", Arrays.asList(""));
 
-    public void setJoinItems() {
-        player.getInventory().clear();
-        setItem(Material.PAPER, 0, "§dMap-Vote", Arrays.asList(""));
-        setItem(Material.IRON_CHESTPLATE, 4, "§dKit-Vote", Arrays.asList(""));
-        setItem(Material.SLIME_BALL, 8, "§dLeave", Arrays.asList(""));
+        ItemStack[] armor = new ItemStack[4];
+        armor[0] = new ItemStack(Material.DIAMOND_BOOTS, 1);
+        armor[1] = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+        armor[2] = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        armor[3] = new ItemStack(Material.DIAMOND_HELMET, 1);
+
+        player.getInventory().setArmorContents(armor);
+
+
     }
 
 

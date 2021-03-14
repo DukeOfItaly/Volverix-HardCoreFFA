@@ -47,5 +47,4 @@ public class EventsListener implements Listener {
     public void onItemUsage(PlayerItemDamageEvent event) {
         event.setCancelled(true);
     }
-
 }

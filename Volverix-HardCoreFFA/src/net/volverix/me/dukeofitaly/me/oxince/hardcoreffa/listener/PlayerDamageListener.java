@@ -18,17 +18,16 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-
-        Player target = (Player) event.getEntity();
-        Location loc = target.getLocation();
-        Location l1 = configPattern.getLocation("l1");
-        Location l2 = configPattern.getLocation("l2");
-
-
-        if (zonePattern.isInSpawn(loc, l1, l2)) {
-            event.setCancelled(true);
-        } else {
-            event.setCancelled(false);
+        if (event.getEntity() instanceof Player) {
+            Player target = (Player) event.getEntity();
+            Location loc = target.getLocation();
+            Location l1 = configPattern.getLocation("l1");
+            Location l2 = configPattern.getLocation("l2");
+            if (zonePattern.isInSpawn(loc, l1, l2)) {
+                event.setCancelled(true);
+            } else {
+                event.setCancelled(false);
+            }
         }
     }
 }

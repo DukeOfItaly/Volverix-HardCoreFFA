@@ -23,30 +23,15 @@ public class HardCoreFFAStatsPattern {
         this.player = player;
     }
 
-    public Integer getDeaths() {
-        Integer d = 0;
-        if (deathsMap.containsKey(player)) {
-            d = deathsMap.get(player);
-        }
-        return d;
-    }
-
-    public Integer getKills() {
-        Integer k = 0;
-        if (killsMap.containsKey(player)) {
-            k = killsMap.get(player);
-        }
-        return k;
-    }
 
     public void addKill(Player player) {
-        Integer currentKills = getKills();
+        Integer currentKills = getKillsMap().get(player);
         Integer newKills = currentKills + 1;
         killsMap.put(player, newKills);
     }
 
     public void addDeaths(Player player) {
-        Integer currentDeaths = getDeaths();
+        Integer currentDeaths = getDeathsMap().get(player);
         Integer newDeaths = currentDeaths + 1;
         deathsMap.put(player, newDeaths);
     }

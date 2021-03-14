@@ -26,8 +26,8 @@ public class PlayerDisconnectListener implements Listener {
         ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
 
 
-        statsPattern.increaseStatistics(StatisticsType.KILLS, sp.getKills());
-        statsPattern.increaseStatistics(StatisticsType.DEATHS, sp.getDeaths());
+        statsPattern.setStatistics(StatisticsType.KILLS, sp.getKillsMap().get(player));
+        statsPattern.setStatistics(StatisticsType.DEATHS, sp.getDeathsMap().get(player));
 
         sp.getDeathsMap().remove(player);
         sp.getKillsMap().remove(player);
@@ -38,7 +38,7 @@ public class PlayerDisconnectListener implements Listener {
 
         //LEAVE MESSAGE
         String prefix = configPattern.getPrefix();
-        event.setQuitMessage(prefix + "§7The player §e" + player + "§7 has left the game!");
+        event.setQuitMessage(prefix + "§7The player §e" + player.getName() + "§7 has left the game!");
 
     }
 

@@ -3,6 +3,7 @@ package net.volverix.me.dukeofitaly.me.oxince.hardcoreffa;
 
 import lombok.Getter;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.BuildCommand;
+import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.CreateMapCommand;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.SetSpawnCommand;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.commands.SpawnZoneCommand;
 import net.volverix.me.dukeofitaly.me.oxince.hardcoreffa.game.KitTypes;
@@ -50,7 +51,7 @@ public class HardCoreFFA extends JavaPlugin {
         this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         this.getCommand("build").setExecutor(new BuildCommand());
         this.getCommand("setpos").setExecutor(new SpawnZoneCommand());
-
+        this.getCommand("createmap").setExecutor(new CreateMapCommand());
     }
 
     private void registerListener() {
@@ -62,8 +63,7 @@ public class HardCoreFFA extends JavaPlugin {
         pm.registerEvents(new PlayerDropItemListener(), this);
         pm.registerEvents(new PlayerDamageListener(), this);
         pm.registerEvents(new EventsListener(), this);
-        pm.registerEvents(new PlayerMoveListener(), this);
-
+        pm.registerEvents(new PlayerRespawnListener(), this);
     }
 
     private void connect() {
@@ -75,7 +75,7 @@ public class HardCoreFFA extends JavaPlugin {
                 driverManager.startConnection();
                 driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS PlayerData (UUID VARCHAR(128) PRIMARY KEY, COINS INT(16), CLAN VARCHAR(16), CLAN_RANK VARCHAR(16), ELO INT(16))").executeUpdate();
                 driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS PlayerSettings (UUID VARCHAR(128) PRIMARY KEY, PARTY_REQUESTS INT(16), FRIEND_REQUESTS INT(16))").executeUpdate();
-                driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS HardCoreFFA (UUID VARCHAR(128) PRIMARY KEY, KILLS INT(16), DEATHS INT(16), POINTS INT(16), WINS INT(16), EXTRAS INT(16))").executeUpdate();
+                driverManager.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS hardcoreffa (UUID VARCHAR(128) PRIMARY KEY, KILLS INT(16), DEATHS INT(16), POINTS INT(16), WINS INT(16), EXTRAS INT(16), ELO INT(16), ELO_RANK VARCHAR(64))").executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
             }

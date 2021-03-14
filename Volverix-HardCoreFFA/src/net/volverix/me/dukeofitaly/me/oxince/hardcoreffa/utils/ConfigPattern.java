@@ -76,5 +76,10 @@ public class ConfigPattern {
         return world;
     }
 
+    public void setMap(String mapName) {
+        cfg.set("MapName", mapName);
+        saveConfig();
+    }
+
 
 }
