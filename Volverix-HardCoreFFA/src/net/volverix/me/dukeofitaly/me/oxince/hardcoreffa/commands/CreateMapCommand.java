@@ -22,9 +22,9 @@ public class CreateMapCommand implements CommandExecutor {
                 if (args.length == 1) {
                     String mapname = args[0];
                     configPattern.setMap(mapname);
-                    player.sendMessage(prefix + "§7You have set the map-name to: §e" + mapname);
+                    player.sendMessage(prefix + "§7Der Name der Map wurde auf §e" + mapname + "§7 gesetzt.");
                 } else {
-                    player.sendMessage(prefix + "§7Please use /createmap <mapname>");
+                    player.sendMessage(prefix + "§7Bitte nutze /createmap <mapname>");
                 }
 
             } else {

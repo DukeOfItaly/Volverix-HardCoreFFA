@@ -38,7 +38,7 @@ public class BuildCommand implements CommandExecutor {
                     inBuild.add(player);
                     player.setGameMode(GameMode.CREATIVE);
                     player.getInventory().clear();
-                    player.sendMessage(prefix + "§7You are now in §dBuild-Mode§7!" + sp.getKillsMap().get(player));
+                    player.sendMessage(prefix + "§7Du bist nun im §dBuild-Mode§7!");
                 } else {
                     player.setGameMode(GameMode.SURVIVAL);
                     if (zonePattern.isInSpawn(player.getLocation(), zonePattern.getL1(), zonePattern.getL2())) {
@@ -47,7 +47,7 @@ public class BuildCommand implements CommandExecutor {
                         itemPattern.setKit();
                     }
                     inBuild.remove(player);
-                    player.sendMessage(prefix + "§7You are no longer in §dBuild-Mode§7!");
+                    player.sendMessage(prefix + "§7Du bist nun nicht mehr im §dBuild-Mode§7!");
                 }
             } else {
                 player.sendMessage(prefix + "§cYou don't have the permissions to execute this command!");

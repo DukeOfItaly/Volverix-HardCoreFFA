@@ -19,14 +19,27 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class HardCoreFFA extends JavaPlugin {
 
 
-    @Getter
     private static HardCoreFFA hardCoreFFA;
-    @Getter
+
     private ConfigPattern configPattern;
-    @Getter
     private DriverManager driverManager;
-    @Getter
     private ZonePattern zonePattern;
+
+    public static HardCoreFFA getHardCoreFFA() {
+        return hardCoreFFA;
+    }
+
+    public ConfigPattern getConfigPattern() {
+        return configPattern;
+    }
+
+    public DriverManager getDriverManager() {
+        return driverManager;
+    }
+
+    public ZonePattern getZonePattern() {
+        return zonePattern;
+    }
 
     @Override
     public void onEnable() {

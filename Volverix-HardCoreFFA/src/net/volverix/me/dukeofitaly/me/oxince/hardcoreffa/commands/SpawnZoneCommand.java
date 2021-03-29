@@ -27,16 +27,16 @@ public class SpawnZoneCommand implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("pos1")) {
                         Location loc = player.getLocation();
                         zonePattern.setPositionL1InConfig(loc);
-                        player.sendMessage(prefix + "§7You have set the position '1' §acorrectly!");
+                        player.sendMessage(prefix + "§7Du hast die Position '§a1§7' gesetzt!");
                     } else if (args[0].equalsIgnoreCase("pos2")) {
                         Location loc = player.getLocation();
                         zonePattern.setPositionL2InConfig(loc);
-                        player.sendMessage(prefix + "§7You have set the position '2' §acorrectly!");
+                        player.sendMessage(prefix + "§7Du hast die Position '§a2§7' gesetzt!");
                     } else {
-                        player.sendMessage(prefix + "§7Please use /setpos <pos1 | pos 2>!");
+                        player.sendMessage(prefix + "§7Bitte nutze /setpos <pos1 | pos 2>!");
                     }
                 } else {
-                    player.sendMessage(prefix + "§7Please use /setpos <pos1 | pos 2>!");
+                    player.sendMessage(prefix + "§7Bitte nutze /setpos <pos1 | pos 2>!");
                 }
             } else {
                 player.sendMessage(prefix + "§cYou don't have the permissions to execute this command!");

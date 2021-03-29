@@ -47,19 +47,16 @@ public class ScoreBoardPattern {
         objective.setDisplayName("§bHardCoreFFA");
 
 
-        objective.getScore("§1").setScore(16);
-        objective.getScore("§7Kills§8:").setScore(15);
-        objective.getScore("§8» §4§6" + sp.getKillsMap().get(player)).setScore(14);
-        objective.getScore("§2").setScore(13);
-        objective.getScore("§7Deaths§8:").setScore(12);
-        objective.getScore("§8» §5§6" + sp.getDeathsMap().get(player)).setScore(11);
-        objective.getScore("§3").setScore(10);
-        objective.getScore("§7Killstreak§8:").setScore(9);
-        objective.getScore("§8» §6" + currentKillStreak).setScore(8);
-        objective.getScore("§4").setScore(7);
-        objective.getScore("§7Rank | Elo-Points§8:").setScore(6);
-        objective.getScore("§8» §6" + eloPattern.getPlayerRank("hardcoreffa") + " | " + eloPattern.getPlayerElo("hardcoreffa")).setScore(5);
-        objective.getScore("§f").setScore(4);
+        objective.getScore("§1").setScore(13);
+        objective.getScore("§7Kills§8:").setScore(12);
+        objective.getScore("§8» §4§6" + sp.getKillsMap().get(player)).setScore(11);
+        objective.getScore("§2").setScore(10);
+        objective.getScore("§7Deaths§8:").setScore(9);
+        objective.getScore("§8» §5§6" + sp.getDeathsMap().get(player)).setScore(8);
+        objective.getScore("§3").setScore(7);
+        objective.getScore("§7Killstreak§8:").setScore(6);
+        objective.getScore("§8» §6" + currentKillStreak).setScore(5);
+        objective.getScore("§4").setScore(4);
         objective.getScore("§7Map§8:").setScore(3);
         objective.getScore("§8» §6" + configPattern.getConfigString("MapName")).setScore(2);
         objective.getScore("§8").setScore(1);

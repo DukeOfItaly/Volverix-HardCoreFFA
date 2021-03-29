@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import java.net.http.WebSocket;
+
 public class PlayerDamageListener implements Listener {
 
     HardCoreFFA hardCoreFFA = HardCoreFFA.getHardCoreFFA();

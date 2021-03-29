@@ -29,26 +29,14 @@ public class PlayerDeathListener implements Listener {
 
         String prefix = configPattern.getPrefix();
 
-        /* SETTING ELO FOR ALL INVOLVED PLAYERS*/
-        EloPattern eloPatternDied = new EloPattern(died.getUniqueId(), hardCoreFFA.getDriverManager());
-        EloPattern eloPatternKiller = new EloPattern(killer.getUniqueId(), hardCoreFFA.getDriverManager());
 
-        Integer newEloDead = eloPatternDied.calculateNewEloPlayerDead(eloPatternDied.getPlayerElo("hardcoreffa"), eloPatternKiller.getPlayerElo("hardcoreffa"));
-        Integer newEloKiller = eloPatternDied.calculateNewEloPlayerKiller(eloPatternDied.getPlayerElo("hardcoreffa"), eloPatternKiller.getPlayerElo("hardcoreffa"));
-        Integer eloDifferenceDead = eloPatternDied.getPlayerElo("hardcoreffa") - newEloDead;
-        Integer eloDifferenceKiller = eloPatternKiller.getPlayerElo("hardcoreffa") - newEloKiller;
-
-
-        eloPatternDied.setPlayerElo(newEloDead, "hardcoreffa");
-        eloPatternKiller.setPlayerElo(newEloKiller, "hardcoreffa");
-
-        died.sendMessage(prefix + "§7You have been killed by §e" + killer.getName() + "§7 [-§c" + eloDifferenceDead + "§7]");
+        died.sendMessage(prefix + "§7Du wurdest von §e" + killer.getName() + "§7 getötet!");
         statsDied.addDeaths(died);
         statsDied.getKillStreak().remove(died);
 
 
         statsKiller.addKill(killer);
-        killer.sendMessage(prefix + "§7You have killed the player §e" + died.getName() + "§7 [+§a" + eloDifferenceKiller + "§7]");
+        killer.sendMessage(prefix + "§7Du hast §e" + died.getName() + " §7getötet");
         killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1000, 1000);
 
         if (statsKiller.getKillStreak().containsKey(killer)) {

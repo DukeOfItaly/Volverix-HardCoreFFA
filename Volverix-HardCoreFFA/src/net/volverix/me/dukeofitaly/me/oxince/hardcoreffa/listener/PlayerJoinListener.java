@@ -28,26 +28,21 @@ public class PlayerJoinListener implements Listener {
         ConfigPattern configPattern = hardCoreFFA.getConfigPattern();
 
         StatisticsPattern statisticsPattern = new StatisticsPattern(hardCoreFFA.getDriverManager(), "hardcoreffa", player.getUniqueId());
-        EloPattern eloPattern = new EloPattern(player.getUniqueId(), hardCoreFFA.getDriverManager());
 
         String prefix = configPattern.getPrefix();
         Location spawn = configPattern.getLocation("spawn");
 
-        if (!(statisticsPattern.statsExist("hardcoreffa"))) {
-            hardCoreFFA.getDriverManager().update("INSERT INTO hardcoreffa (UUID, KILLS, DEATHS, POINTS, WINS, EXTRAS, ELO, ELO_RANK) VALUES ('" + player.getUniqueId() + "', '" + 0 + "', '" + 0 + "', '" + 0 + "', '" + 0 + "', '" + 0 + "', '" + 1000 + "', '" + "Iron IV" + "')");
-        }
+        statisticsPattern.createStatistics();
 
         ScoreBoardPattern scoreBoardPattern = new ScoreBoardPattern(player);
 
         sp.getKillsMap().put(player, statisticsPattern.getStatistics(StatisticsType.KILLS));
         sp.getDeathsMap().put(player, statisticsPattern.getStatistics(StatisticsType.DEATHS));
 
-        eloPattern.updateEloRank("hardcoreffa");
-
         player.teleport(spawn);
         player.setGameMode(GameMode.SURVIVAL);
         itemPattern.setKit();
-        event.setJoinMessage(prefix + "§7The player §e" + player.getName() + "§7 has joined the game!" + statisticsPattern.getStatistics(StatisticsType.KILLS) + sp.getKillsMap().get(player));
+        event.setJoinMessage(prefix + "§7Der Spieler §e" + player.getName() + "§7 hat das Spiel betreten!");
         scoreBoardPattern.setScoreBoard();
     }
 }

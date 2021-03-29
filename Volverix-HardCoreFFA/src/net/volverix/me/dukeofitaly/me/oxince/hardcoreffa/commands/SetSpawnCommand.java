@@ -23,9 +23,9 @@ public class SetSpawnCommand implements CommandExecutor {
                 if (args.length == 0) {
                     Location spawn = player.getLocation();
                     configPattern.setLocation("spawn", spawn);
-                    player.sendMessage(prefix + "§aYou have set the spawn correctly!");
+                    player.sendMessage(prefix + "§aDu hast den Spawn gesetzt.");
                 } else {
-                    player.sendMessage(prefix + "§7Please use /setspawn");
+                    player.sendMessage(prefix + "§7Bitte nutze /setspawn");
                 }
             } else {
                 player.sendMessage(prefix + "§cYou don't have the permissions to execute this command!");
